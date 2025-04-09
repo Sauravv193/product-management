@@ -1,0 +1,139 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  background-color: #fefefe;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+input:focus {
+  border-color: #66bb6a;
+  box-shadow: 0 0 6px rgba(102, 187, 106, 0.3);
+  outline: none;
+}
+
+button {
+  padding: 12px 24px;
+  background: linear-gradient(to right, #43e97b, #38f9d7);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(72, 239, 191, 0.3);
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(72, 239, 191, 0.5);
+}
+
+.logout-button {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  box-shadow: 0 4px 10px rgba(255, 75, 43, 0.3);
+  margin-bottom: 20px;
+}
+
+.logout-button:hover {
+  box-shadow: 0 6px 14px rgba(255, 75, 43, 0.5);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  font-weight: bold;
+  color: #333;
+}
+
+td {
+  background-color: #fafafa;
+  color: #555;
+}
+
+.actions button {
+  margin: 0 4px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.edit-button {
+  background: linear-gradient(to right, #36d1dc, #5b86e5);
+  color: white;
+}
+
+.edit-button:hover {
+  box-shadow: 0 4px 12px rgba(91, 134, 229, 0.4);
+}
+
+.delete-button {
+  background: linear-gradient(to right, #ff5858, #f09819);
+  color: white;
+}
+
+.delete-button:hover {
+  box-shadow: 0 4px 12px rgba(255, 88, 88, 0.4);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  input, button {
+    font-size: 0.95rem;
+  }
+}
