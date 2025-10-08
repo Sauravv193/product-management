@@ -1,11 +1,26 @@
 import React from 'react';
 
-const LoadingSpinner = ({ size = 'md', className = '' }) => {
+const LoadingSpinner = ({ size = 'md', className = '', color = 'currentColor' }) => {
+  const dimensions = {
+    sm: '16px',
+    md: '24px',
+    lg: '32px',
+    xl: '48px'
+  };
+
   return (
-    <div className={`loading-spinner ${className}`} style={{
-      width: size === 'sm' ? '16px' : size === 'lg' ? '32px' : '24px',
-      height: size === 'sm' ? '16px' : size === 'lg' ? '32px' : '24px'
-    }}>
+    <div 
+      className={`${className}`}
+      style={{
+        width: dimensions[size],
+        height: dimensions[size],
+        border: `2px solid transparent`,
+        borderTop: `2px solid ${color}`,
+        borderRadius: '50%',
+        animation: 'spin 1s linear infinite',
+        display: 'inline-block'
+      }}
+    >
     </div>
   );
 };

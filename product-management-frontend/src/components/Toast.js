@@ -12,20 +12,24 @@ const Toast = ({ message, type = 'info', isVisible, onClose, duration = 4000 }) 
 
   const typeStyles = {
     success: {
-      backgroundColor: 'var(--success)',
-      color: 'white'
+      background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+      color: 'white',
+      boxShadow: '0 10px 25px -5px rgba(16, 185, 129, 0.25), 0 8px 10px -6px rgba(16, 185, 129, 0.2)'
     },
     error: {
-      backgroundColor: 'var(--danger)',
-      color: 'white'
+      background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+      color: 'white',
+      boxShadow: '0 10px 25px -5px rgba(239, 68, 68, 0.25), 0 8px 10px -6px rgba(239, 68, 68, 0.2)'
     },
     warning: {
-      backgroundColor: 'var(--warning)',
-      color: 'white'
+      background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+      color: 'white',
+      boxShadow: '0 10px 25px -5px rgba(245, 158, 11, 0.25), 0 8px 10px -6px rgba(245, 158, 11, 0.2)'
     },
     info: {
-      backgroundColor: 'var(--info)',
-      color: 'white'
+      background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+      color: 'white',
+      boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.25), 0 8px 10px -6px rgba(59, 130, 246, 0.2)'
     }
   };
 
@@ -67,14 +71,15 @@ const Toast = ({ message, type = 'info', isVisible, onClose, duration = 4000 }) 
         top: '20px',
         right: '20px',
         zIndex: 1000,
-        padding: 'var(--space-4)',
-        borderRadius: 'var(--radius-lg)',
-        boxShadow: 'var(--shadow-lg)',
+        padding: '1rem 1.25rem',
+        borderRadius: '16px',
         display: 'flex',
         alignItems: 'center',
-        gap: 'var(--space-3)',
-        maxWidth: '400px',
-        animation: 'slideIn 0.3s ease-out',
+        gap: '0.75rem',
+        maxWidth: '420px',
+        animation: 'slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
         ...typeStyles[type]
       }}
     >

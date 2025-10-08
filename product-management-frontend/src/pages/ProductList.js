@@ -239,12 +239,12 @@ function ProductList() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)' }}>
       <div className="container">
         <Header title="Product Management" />
 
         {/* Action Bar */}
-        <div className="card">
+        <div className="glass-card fade-in">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             {/* Search Bar */}
             <div className="flex-1 max-w-md">
@@ -367,14 +367,20 @@ function ProductList() {
 
         {/* Product Form Modal */}
         {showProductForm && (
-          <div className="card">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800">
-                {editId ? 'Edit Product' : 'Add New Product'}
-              </h2>
+          <div className="glass-card slide-up">
+            <div className="flex justify-between items-start mb-8">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                  {editId ? 'Edit Product' : 'Add New Product'}
+                </h2>
+                <p className="text-gray-600">
+                  {editId ? 'Update the details of your product' : 'Fill in the information to create a new product'}
+                </p>
+              </div>
               <button 
                 onClick={() => setShowProductForm(false)}
                 className="btn btn-secondary btn-sm"
+                style={{ flexShrink: 0 }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="18" y1="6" x2="6" y2="18" />
@@ -489,106 +495,117 @@ function ProductList() {
           </div>
         )}
 
-        {/* Products Grid/Table */}
-        <div className="card">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-gray-800">
-              Products ({filteredProducts.length})
-            </h2>
+        {/* Products Section */}
+        <div className="glass-card fade-in">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-1">
+                Your Products
+              </h2>
+              <p className="text-gray-600">
+                {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found
+                {searchTerm && ` matching "${searchTerm}"`}
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 text-sm text-gray-500">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="4" width="18" height="16" rx="2" />
+                  <path d="M7 8h10M7 12h10M7 16h4" />
+                </svg>
+                Grid View
+              </div>
+            </div>
           </div>
 
           {filteredProducts.length === 0 ? (
-            <div className="text-center py-12">
-              <svg width="48" height="48" className="mx-auto mb-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <div className="text-center py-12 fade-in">
+              <svg width="64" height="64" className="mx-auto mb-6 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10" />
               </svg>
-              <p className="text-gray-500 text-lg mb-2">No products found</p>
-              <p className="text-gray-400 mb-4">Get started by adding your first product</p>
-              <button onClick={handleNewProduct} className="btn btn-primary">
-                Add Product
+              <h3 className="text-2xl font-bold text-gray-700 mb-3">No products found</h3>
+              <p className="text-gray-500 mb-6">Get started by adding your first product to your collection</p>
+              <button onClick={handleNewProduct} className="btn btn-primary btn-lg bounce-in">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Add Your First Product
               </button>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr style={{ backgroundColor: 'var(--gray-50)', borderBottom: '2px solid var(--gray-200)' }}>
-                    <th style={{ padding: 'var(--space-4)', textAlign: 'left', fontWeight: 600, color: 'var(--gray-700)' }}>Product</th>
-                    <th style={{ padding: 'var(--space-4)', textAlign: 'left', fontWeight: 600, color: 'var(--gray-700)' }}>Category</th>
-                    <th style={{ padding: 'var(--space-4)', textAlign: 'left', fontWeight: 600, color: 'var(--gray-700)' }}>Description</th>
-                    <th style={{ padding: 'var(--space-4)', textAlign: 'right', fontWeight: 600, color: 'var(--gray-700)' }}>Price</th>
-                    <th style={{ padding: 'var(--space-4)', textAlign: 'right', fontWeight: 600, color: 'var(--gray-700)' }}>Rating</th>
-                    <th style={{ padding: 'var(--space-4)', textAlign: 'center', fontWeight: 600, color: 'var(--gray-700)' }}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredProducts.map((product, index) => (
-                    <tr key={product.id} style={{ 
-                      borderBottom: '1px solid var(--gray-200)',
-                      backgroundColor: index % 2 === 0 ? 'white' : 'var(--gray-50)'
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProducts.map((product, index) => (
+                <div key={product.id} className="product-card fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <div style={{ padding: 'var(--space-6)' }}>
+                    {/* Product Header */}
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-800 mb-2" style={{ lineHeight: '1.3' }}>{product.name}</h3>
+                        <div className="product-badge">{product.category}</div>
+                      </div>
+                      <div className="price-tag">${product.price.toFixed(2)}</div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-gray-600 mb-4" style={{ 
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                      lineHeight: '1.5',
+                      minHeight: '4.5rem'
                     }}>
-                      <td style={{ padding: 'var(--space-4)' }}>
-                        <div style={{ fontWeight: 500, color: 'var(--gray-800)' }}>{product.name}</div>
-                      </td>
-                      <td style={{ padding: 'var(--space-4)', color: 'var(--gray-600)' }}>
-                        <span style={{ 
-                          backgroundColor: 'var(--primary)', 
-                          color: 'white', 
-                          padding: 'var(--space-1) var(--space-2)', 
-                          borderRadius: 'var(--radius-md)', 
-                          fontSize: 'var(--text-xs)',
-                          fontWeight: 500
-                        }}>
-                          {product.category}
-                        </span>
-                      </td>
-                      <td style={{ padding: 'var(--space-4)', color: 'var(--gray-600)', maxWidth: '200px' }}>
-                        <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                          {product.description}
-                        </div>
-                      </td>
-                      <td style={{ padding: 'var(--space-4)', textAlign: 'right', fontWeight: 600, color: 'var(--gray-800)' }}>
-                        ${product.price.toFixed(2)}
-                      </td>
-                      <td style={{ padding: 'var(--space-4)', textAlign: 'right' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 'var(--space-1)' }}>
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ color: '#fbbf24' }}>
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                          </svg>
-                          <span style={{ color: 'var(--gray-700)', fontWeight: 500 }}>{product.rating}</span>
-                        </div>
-                      </td>
-                      <td style={{ padding: 'var(--space-4)', textAlign: 'center' }}>
-                        <div style={{ display: 'flex', gap: 'var(--space-2)', justifyContent: 'center' }}>
-                          <button 
-                            onClick={() => handleEdit(product)}
-                            className="btn btn-sm"
-                            style={{ backgroundColor: 'var(--info)', color: 'white' }}
-                          >
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                            </svg>
-                            Edit
-                          </button>
-                          <button 
-                            onClick={() => handleDeleteClick(product)}
-                            className="btn btn-danger btn-sm"
-                          >
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <polyline points="3,6 5,6 21,6" />
-                              <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6" />
-                              <line x1="10" y1="11" x2="10" y2="17" />
-                              <line x1="14" y1="11" x2="14" y2="17" />
-                            </svg>
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      {product.description}
+                    </p>
+
+                    {/* Rating */}
+                    <div className="rating-stars mb-6">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <svg 
+                          key={star}
+                          width="18" 
+                          height="18" 
+                          viewBox="0 0 24 24" 
+                          fill={star <= Math.floor(product.rating) ? 'currentColor' : 'none'}
+                          stroke={star <= Math.floor(product.rating) ? 'none' : 'currentColor'}
+                          strokeWidth="1"
+                          className={star <= Math.floor(product.rating) ? 'star-filled' : 'text-gray-300'}
+                        >
+                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                      ))}
+                      <span className="text-gray-700 font-semibold ml-2">{product.rating}/5</span>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-3">
+                      <button 
+                        onClick={() => handleEdit(product)}
+                        className="btn btn-secondary btn-sm flex-1"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                        </svg>
+                        Edit
+                      </button>
+                      <button 
+                        onClick={() => handleDeleteClick(product)}
+                        className="btn btn-danger btn-sm flex-1"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <polyline points="3,6 5,6 21,6" />
+                          <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6" />
+                          <line x1="10" y1="11" x2="10" y2="17" />
+                          <line x1="14" y1="11" x2="14" y2="17" />
+                        </svg>
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
